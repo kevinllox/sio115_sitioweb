@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancha de Fútbol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('/img/cancha.jpeg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .player {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2.5rem;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .player:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-left .player {
+            background: linear-gradient(135deg, #fff 0%, #e3f2fd 100%);
+            border-left: 5px solid #1976d2;
+        }
+
+        .team-right .player {
+            background: linear-gradient(135deg, #fff 0%, #fff3e0 100%);
+            border-right: 5px solid #f57c00;
+        }
+
+        .center-emblems {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+        }
+
+        .emblem {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .emblem:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .emblem img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+        }
+
+        .vs {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .player {
+                font-size: 1.2rem;
+                padding: 1.2rem 2rem;
+            }
+
+            .emblem {
+                width: 100px;
+                height: 100px;
+            }
+
+            .emblem img {
+                width: 75px;
+                height: 75px;
+            }
+
+            .vs {
+                font-size: 2.5rem;
+            }
+
+            .center-emblems {
+                gap: 2rem;
+                padding: 1.5rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                justify-content: space-around;
+                padding: 1.5rem;
+            }
+
+            .team {
+                flex-direction: row;
+                gap: 1rem;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .player {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+                flex: 0 1 auto;
+            }
+
+            .center-emblems {
+                gap: 1.5rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .emblem {
+                width: 80px;
+                height: 80px;
+            }
+
+            .emblem img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .vs {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .player {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .emblem {
+                width: 60px;
+                height: 60px;
+            }
+
+            .emblem img {
+                width: 45px;
+                height: 45px;
+            }
+
+            .vs {
+                font-size: 1.5rem;
+            }
+
+            .center-emblems {
+                gap: 1rem;
+                padding: 0.8rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay"></div>
+    </div>
+
+    <div class="content">
+        <div class="team team-left">
+            <div class="player">Ricardo Hernández</div>
+            <div class="player">Kevin Grande</div>
+        </div>
+
+        <div class="center-emblems">
+            <div class="emblem">
+                <img src="img/realmadrid.svg" alt="Real Madrid">
+            </div>
+            <div class="vs">VS</div>
+            <div class="emblem">
+                <img src="img/barca.svg" alt="Barcelona">
+            </div>
+        </div>
+
+        <div class="team team-right">
+            <div class="player">Nelson Ayala</div>
+            <div class="player">Julio Gil</div>
+        </div>
+    </div>
+</body>
+</html>
